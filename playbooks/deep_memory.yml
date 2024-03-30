@@ -1,0 +1,53 @@
+---
+- hosts: linux
+  gather_facts: true
+  become: true
+  become_user: root
+  ignore_errors: true
+
+  tasks:
+
+    - name: checking the device IP address
+      debug:
+        msg: "IP address is {{ ansible_default_ipv4.address }}"
+      register: ansible_ip
+
+    - name: checking the total size memory on target node
+      shell: free -h | awk 'NR == 2 {print $1}'
+      register: total_memory
+
+    - name: append total memory to file
+      lineinfile:
+        path: /tmp/memory_status.txt
+        line: "{{ total_memory.stdout }}"
+        create: yes
+
+    - name: checking the used size memory on target node
+      shell: free -h | awk 'NR == 2 {print $2}'
+      register: used_memory
+
+    - name: append used memory to file
+      lineinfile:
+        path: /tmp/memory_status.txt
+        line: "{{ used_memory.stdout }}"
+        create: no
+
+    - name: checking the free size memory on target node
+      shell: free -h | awk 'NR == 2 {print $3}'
+      register: free_memory
+
+    - name: append free memory to file
+      lineinfile:
+        path: /tmp/memory_status.txt
+        line: "{{ free_memory.stdout }}"
+        create: no
+
+    - name: checking the available size memory on target node
+      shell: free -h | awk 'NR == 2 {print $7}'
+      register: available_memory
+
+    - name: append available memory to file
+      lineinfile:
+        path: /tmp/memory_status.txt
+        line: "{{ available_memory.stdout }}"
+        create: no

@@ -1,0 +1,44 @@
+---
+- hosts: linux
+  gather_facts: true
+  ignore_errors: true
+  become: true
+  become_user: root
+
+  vars:
+     ssh_key: /root/.ssh/id_rsa
+
+  tasks:
+    - name: checking the hostname of the machine
+      ansible.builtin.command: hostname
+      register: ansible_hostname
+
+    - name: printing the hostname
+      debug:
+        msg: "Hostname of the target machine is {{ ansible_hostname.stdout }}"
+      ignore_errors: true
+
+    - name: print the IP address of target machine
+      debug:
+        msg: "IP address of {{ ansible_hostname.stdout }} is {{ ansible_default_ipv4.address }}"
+      ignore_errors: true
+
+    - name: print the OS version of target machine
+      debug:
+        msg: "OS version of {{ ansible_hostname.stdout }} is {{ ansible_distribution }}{{ ansible_distribution_version }}"
+      ignore_errors: true
+
+    - name: store all the details on master node
+      ansible.builtin.lineinfile:
+        path: /tmp/playbooks/systeminfo.txt
+        line: "{{ ansible_hostname.stdout }} is the launch node {{ ansible_default_ipv4.address }} and os {{ ansible_distribution }} {{ ansible_distribution_version }}"
+          #create: yes
+        insertafter: EOF
+      delegate_to: localhost
+
+    - name: copying the ssh keys on target node
+      copy:
+        src: "{{ ssh_key}}"
+        dest: "{{ ssh_key}}"
+        mode: 0600
+        owner: root

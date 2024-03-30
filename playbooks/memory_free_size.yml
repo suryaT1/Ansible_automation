@@ -1,0 +1,27 @@
+---
+- hosts: linux
+  gather_facts: true
+  become: true
+  become_user: root
+  ignore_errors: true
+
+  tasks:
+
+    - name: checking the device IP address
+      debug:
+        msg: "IP address  is {{ ansible_default_ipv4.address }}"
+      register: ansible_ip
+
+    - name: checking the free size memory on target node
+      shell: free -h | awk 'NR == 2 {print $7}'
+      register: system_memory
+
+    - name: print the free memory size
+      debug:
+        msg: "Memory storage available on {{ ansible_default_ipv4.address }} is {{ system_memory.stdout }}"
+      copy:
+         dest: /tmp/output.txt
+         owner: root
+         mode: 0600
+      delegate_to: localhost
+      when: system_memory is succeeded

@@ -1,0 +1,24 @@
+---
+- hosts: all
+  gather_facts: yes
+  tasks:
+    - name: check the ansible connectivity to Linux endpoint
+      ping: null
+      register: test
+      ignore_errors: true
+
+    - name: Get the IP address of the target host
+      set_fact:
+        device_ip: "{{ ansible_default_ipv4.address }}"
+      ignore_errors: true
+
+    - name: Display the IP address
+      debug:
+        msg: "{{ device_ip }}"
+      ignore_errors: true
+
+    - name: Save connectivity status to text file
+      ansible.builtin.copy:
+        content: "{{ 'Connected' if test.ping == 'pong' else 'Not Connected' }}"
+        dest: "/tmp/{{ device_ip }}_connectivity_status.txt"
+      delegate_to: localhost
