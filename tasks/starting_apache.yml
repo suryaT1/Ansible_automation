@@ -1,0 +1,7 @@
+---
+  - name: copying the index html from master node
+    copy:
+      src: files/index.html
+      dest: /var/www/html/
+      owner: root
+      mode: 644
