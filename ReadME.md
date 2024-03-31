@@ -1,1 +1,7 @@
-This branch contians only roles those has been created and succesfully executed on target hosts
+This branch contains the playbooks to install apache services on target node
+
+################################################################################
+
+any doubts please reach out to author
+
+surya.adck@gamil.com
