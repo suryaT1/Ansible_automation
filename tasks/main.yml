@@ -1,0 +1,4 @@
+---
+- import_tasks: apt_upgradtion.yml
+- import_tasks: apache_instllation.yml
+- import_tasks: starting_apache.yml
