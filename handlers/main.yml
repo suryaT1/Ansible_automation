@@ -1,0 +1,10 @@
+---
+- name: restart apache service
+  service:
+    name: apache2
+    state: restarted
+
+- name: debug message
+  debug:
+    msg: "Apache service has been restarted"
+
