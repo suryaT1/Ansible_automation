@@ -1,0 +1,9 @@
+---
+- name: Update apt package cache on target machine
+  apt:
+    update_cache: yes
+
+- name: Upgrade all packages on target machine
+  apt:
+    upgrade: yes
+    update_cache: yes

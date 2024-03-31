@@ -1,0 +1,10 @@
+---
+- name: copying the index file into target machine
+  copy:
+    src: files/index.html
+    dest: /var/www/html/
+    owner: root
+    mode: 0644
+  
+  notify:
+    - restart nginx service

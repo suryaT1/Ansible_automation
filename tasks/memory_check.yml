@@ -1,0 +1,14 @@
+---
+- name: checking the device name
+  ansible.builtin.command: hostname
+  register: hostname
+- name: print the device name
+  debug:
+    msg: " nginx installing on {{ hostname}}"
+  ignore_errors: true
+- name: checking the memory size of target machine
+  shell: free -h | awk 'NR == 2 {gsub(/[^0-9]/, "", $7); print $7}'
+  register: memory_size
+- name: print the memory size of target machine
+  debug:
+    msg: " Available free memory on {{ hostname }} is {{ memory_size }}"

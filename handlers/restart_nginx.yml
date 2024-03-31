@@ -1,0 +1,9 @@
+---
+- name: restart nginx service
+  service:
+    name: nginx
+    state: restarted
+
+- name: sharing the status
+  debug:
+    msg: " restarting the nginx services succesfullly"
