@@ -1,0 +1,8 @@
+---
+ - name: installing apache webserver services on target machine
+   package:
+     name: apache2
+     state: latest
+
+   notify:
+      - restart apache service
