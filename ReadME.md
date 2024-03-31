@@ -1,4 +1,4 @@
-This branch contains the playbooks to install apache services on target node
+This branch contains the playbook to install apache services on target node
 
 ################################################################################
 
