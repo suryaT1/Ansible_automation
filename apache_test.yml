@@ -1,0 +1,8 @@
+---
+- hosts: web_server
+  gather_facts: true
+  become: true
+  become_user: root
+
+  roles:
+    - apache_service
