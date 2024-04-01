@@ -4,9 +4,9 @@
   become_user: root
   gather_facts: true
 
-  - roles:
-      nginx_service
-
+  roles:
+    - nginx_service
+    
   - tasks: 
       
       - name: print the status
