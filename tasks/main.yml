@@ -1,0 +1,5 @@
+---
+- import_tasks: upgradation.yml
+- import_tasks: memory_check.yml
+- import_tasks: nginx_install.yml
+- import_tasks: copying_index.yml
