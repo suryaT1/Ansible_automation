@@ -1,0 +1,12 @@
+---
+- name: playbook to list the os version
+  hosts: all 
+  become_user: root
+  tasks:
+     - name: View the contents 
+       shell: cat /etc/os-release |grep  "REDHAT_SUPPORT_PRODUCT_VERSION"
+       register: output1 
+       
+     - name: debuggin the message 
+       debug: 
+         var: output1.stdout_lines

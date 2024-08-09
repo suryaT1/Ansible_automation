@@ -1,0 +1,10 @@
+- name: Determine Windows version
+  set_fact:
+    windows_version: "{{ ansible_facts['distribution_version'] | default('Unknown Version') }}"
+
+- name: Check Windows version
+  debug:
+    msg: >
+      OS version of endpoint is {{
+      windows_version_map.get(windows_version, 'Unknown Version')
+      }}

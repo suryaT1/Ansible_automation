@@ -1,0 +1,13 @@
+- name: ansible-role-event-socks-tunnel
+  src: git+https://github.kyndryl.net/Continuous-Engineering/ansible-role-event-socks-tunnel.git
+  version: 23.5/main
+
+- name: returncode
+  src: git+https://github.kyndryl.net/Continuous-Engineering/ansible_role_returncode.git
+  version: 1.4/main
+
+# generic role for mailing
+- name: Composing_mail
+  scm: 'git'
+  src: https://github.kyndryl.net/EU-DACH-All/ansible-role-mailing
+  version: main  
