@@ -1,6 +1,6 @@
 ---
 - name: Sending mail to requester
-  hosts: "grzslx237.andritz.com"
+  hosts: "device_name"
   ignore_unreachable: yes
   gather_facts: no
   tasks:
@@ -9,9 +9,9 @@
         host: grzxsmtp.andritz.com
         port: 25
         to: "{{ to_address }}"
-        subject: "{{ job_id }} - {{ jt_name }} - Execution status"
-        body: "Please find the attached file for the execution status of the job {{ job_id }} - {{ jt_name }}"
+        subject: ""
+        body: "Please find the attached file "
         secure: starttls
-        from: grzsakyndryl_crowdstrike_status@andritz.com
+        from: ""
         attach:
           - "{{ email_file }}"
