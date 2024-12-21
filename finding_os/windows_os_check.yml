@@ -1,13 +1,4 @@
 ---
-# **** Setting Socket tunnel ****
-- name: Role ensures that the socks tunnel is setup
-  hosts: localhost
-  connection: local
-  gather_facts: false
-  tasks:
-  roles:
-    - role: ansible-role-event-socks-tunnel
-
 - name: Check Windows OS version
   hosts: all
   connection: local
